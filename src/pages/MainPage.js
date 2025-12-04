@@ -1,28 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
-import itemsData from '../data/items.json';
+import itemsData from '../data/items.json'; 
 
 function MainPage() {
+  //states
+  const [searchTerm, setSearchTerm] = useState(''); //search state 
+  
+  const [selectedGenre, setSelectedGenre] = useState('all');  // filtering state
+  
+  const [sortOption, setSortOption] = useState('default'); // sorting state
+  
+  // save the invoked data in a state
+
   const [items, setItems] = useState([]); 
-  const [selectedGenre, setSelectedGenre] = useState('all');
-  const [sortOption, setSortOption] = useState('default');
-    useEffect(() => {
-    setItems(itemsData);
+  useEffect(() => {
+        setItems(itemsData); 
   }, []);
 
-  const getFilteredAndSortedItems = () => {
-    let list = [...items];
-    if (sortOption !== 'default') { //sort function
+   const getFilteredAndSortedItems = () => {
+
+    let list = [...itemsData]; 
+    
+//search logic 
+
+    if (searchTerm) {
+        list = list.filter(item => 
+            
+            item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
+    
+// genre filtering 
+
+    if (selectedGenre !== 'all') {
+
+        list = list.filter(item => item.genre === selectedGenre);
+    }
+    
+// sorting logic 
+
+    if (sortOption !== 'default') { // sort function
       list.sort((a, b) => {
         switch (sortOption) {
           case 'duration-short':
-            return a.duration - b.duration;  //shortest first ascending
+            return a.duration - b.duration;  // shortest first ascending
           case 'duration-long':
-            return b.duration - a.duration;  //longest first descending
+            return b.duration - a.duration;  // longest first descending
           case 'year':
-            return b.year - a.year;  //newset first
+            return b.year - a.year;  // newest first
           default:
-            return 0; // No sort
+            return 0; // no sort 
         }
       });
     }
@@ -30,10 +57,11 @@ function MainPage() {
     return list;
   };
   const displayedItems = getFilteredAndSortedItems();
+
+  
   return (
     <div className="page-container">
       <h2>Movie Collection</h2>
-      
       
       <div className="controls">
         
@@ -41,9 +69,15 @@ function MainPage() {
           type="text" 
           placeholder="Search movies..." 
           className="search-input"
+          value={searchTerm}  
+          onChange={(e) => setSearchTerm(e.target.value)}  
         />
         
-        <select className="sort-select" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
+        <select 
+          className="sort-select" 
+          value={selectedGenre} 
+          onChange={(e) => setSelectedGenre(e.target.value)}
+        >
           <option value="all">All Genres</option>
           <option value="Action">Action</option>
           <option value="Animation">Animation</option>
@@ -52,8 +86,13 @@ function MainPage() {
           <option value="Sci-Fi">Sci-Fi</option>
           <option value="Thriller">Thriller</option>
         </select>
-      
-        <select className="sort-select" value ={sortOption} onChange={(e) => setSortOption(e.target.value)}> 
+
+
+        <select 
+          className="sort-select" 
+          value ={sortOption} 
+          onChange={(e) => setSortOption(e.target.value)}
+        > 
           <option value="default">Sort By...</option>
           <option value="duration-short">Duration: Shortest First</option>
           <option value="duration-long">Duration: Longest First</option>
@@ -76,7 +115,7 @@ function MainPage() {
             </div>
           ))
         ) : (
-          <p>No movies match your search criteria.</p>
+          <p>No movies match your criteria or search for: "{searchTerm}".</p> 
         )}
       </div>
     </div>
