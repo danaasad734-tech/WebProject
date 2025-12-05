@@ -21,7 +21,7 @@ function AboutPage() {
             <strong>Sara Naji Fraihat</strong> 
           </li>
           <li>
-            <strong>Sarah hamzeh Shammout</strong> 
+            <strong>Sarah Hamzeh Shammout</strong> 
           </li>
         </ul>
       </div>
