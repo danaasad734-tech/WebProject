@@ -172,3 +172,46 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
+@media (max-width: 768px) {
+  
+  .header {
+    flex-direction: column; /* Stack Title on top */
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .header h1 {
+    margin-bottom: 15px;
+  }
+
+  .header .links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; 
+  }
+
+  .header .links a {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .controls {
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  .search-input, 
+  .sort-select {
+    width: 100%; 
+    margin: 0;
+  }
+  
+  .item-grid {
+    padding: 10px;
+    gap: 15px;
+  }
+}
