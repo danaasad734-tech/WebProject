@@ -15,13 +15,13 @@ function AboutPage() {
         <h3>Our Team Members:</h3>
         <ul style={{ lineHeight: '1.8', fontSize: '1.1rem', color: '#2c3e50' }}>
           <li>
-            <strong>Dana Mohammad Asad</strong> 
+            <strong>Dana Mohammad Asad</strong> ID: 2332838
           </li>
           <li>
-            <strong>Sara Naji Fraihat</strong> 
+            <strong>Sara Naji Fraihat</strong> ID: 2332395
           </li>
           <li>
-            <strong>Sarah Hamzeh Shammout</strong> 
+            <strong>Sarah Hamzeh Shammout</strong> ID: 2239048 
           </li>
         </ul>
       </div>
