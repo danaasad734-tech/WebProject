@@ -5,12 +5,13 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo').default; 
 require('dotenv').config();
+const requestLogger = require('./middleware/requestlogger');
 
 const app = express();
+app.use(requestLogger);
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 
-//const mongoUrl = "mongodb+srv://test:test@cluster0.mongodb.net/myDB?retryWrites=true&w=majority";
 const mongoUrl = process.env.MONGO_URI;
 app.use(session({
     secret: 'sara_secret',
