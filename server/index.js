@@ -6,10 +6,15 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo').default; 
 require('dotenv').config();
 const requestLogger = require('./middleware/requestlogger');
+const cors = require('cors');
 
 const app = express();
 app.use(requestLogger);
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 app.use('/api/auth', authRoutes);
 
 const mongoUrl = process.env.MONGO_URI;

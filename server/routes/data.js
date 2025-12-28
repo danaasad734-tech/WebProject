@@ -1,10 +1,8 @@
 const express = require("express");
 const Data = require("../models/Data");
-//const isAuth = require("../middleware/auth");
 
 const router = express.Router();
 
-//create data
 router.post("/", isAuth, async (req, res) => {
   const { title, description } = req.body;
 
@@ -18,7 +16,6 @@ router.post("/", isAuth, async (req, res) => {
   res.status(201).json(data);
 });
 
-//read data
 router.get("/", isAuth, async (req, res) => {
   const data = await Data.find({
     user: req.session.userId
@@ -26,8 +23,7 @@ router.get("/", isAuth, async (req, res) => {
 
   res.json(data);
 });
-
-//update data 
+ 
 router.put("/:id", isAuth, async (req, res) => {
   const updatedData = await Data.findOneAndUpdate(
     { _id: req.params.id, user: req.session.userId },
@@ -42,7 +38,6 @@ router.put("/:id", isAuth, async (req, res) => {
   res.json(updatedData);
 });
 
-//delete data
 router.delete("/:id", isAuth, async (req, res) => {
   const deletedData = await Data.findOneAndDelete({
     _id: req.params.id,
