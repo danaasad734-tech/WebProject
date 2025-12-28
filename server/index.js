@@ -14,7 +14,7 @@ app.use('/api/auth', authRoutes);
 
 const mongoUrl = process.env.MONGO_URI;
 app.use(session({
-    secret: 'sara_secret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
 
@@ -40,3 +40,4 @@ app.get('/hello', (req, res) => {
 });
 
 app.listen(5000, () => console.log(' Server running on port 5000'));
+

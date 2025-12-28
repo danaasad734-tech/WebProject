@@ -35,3 +35,12 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+//log out 
+router.post("/logout", (req, res) => {
+      req.session.destroy(() => {
+    res.json({ message: "Logged out successfully" });
+  });
+});
+module.exports = router; // all index.js  to use auth routers
+
+
