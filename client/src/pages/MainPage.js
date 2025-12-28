@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
-import itemsData from '../data/items.json'; 
 
 function MainPage() {
   //states
@@ -13,13 +12,22 @@ function MainPage() {
   // save the invoked data in a state
 
   const [items, setItems] = useState([]); 
+  //fetch data from API
   useEffect(() => {
-        setItems(itemsData); 
-  }, []);
+  fetch("http://localhost:5000/api/items", {
+    credentials: "include"
+  })
+    .then(res => res.json())
+    .then(data => {
+      setItems(data);
+    })
+    .catch(err => console.error(err));
+}, []);
 
    const getFilteredAndSortedItems = () => {
 
-    let list = [...itemsData]; 
+    let list = [...items];
+
     
 //search logic 
 
@@ -104,7 +112,7 @@ function MainPage() {
       <div className="item-grid">
         {displayedItems.length > 0 ? (
           displayedItems.map((item) => (
-            <div key={item.id} className="item-card">
+            <div key={item._id} className="item-card">
               <h3>{item.title}</h3>
               <p className="director">Dir: {item.director}</p>
               <div className="details">
