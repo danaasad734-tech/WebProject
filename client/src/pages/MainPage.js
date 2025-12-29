@@ -11,7 +11,7 @@ function MainPage() {
 
   const [items, setItems] = useState([]); 
   useEffect(() => {
-  fetch("http://localhost:5000/api/items", {
+  fetch("https://webproject-ziky.onrender.com/api/items", {
     credentials: "include"
   })
     .then(res => res.json())
