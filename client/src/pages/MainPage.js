@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import '../App.css'; 
 
 function MainPage() {
-  //states
   const [searchTerm, setSearchTerm] = useState(''); //search state 
   
   const [selectedGenre, setSelectedGenre] = useState('all');  // filtering state
   
   const [sortOption, setSortOption] = useState('default'); // sorting state
   
-  // save the invoked data in a state
 
   const [items, setItems] = useState([]); 
-  //fetch data from API
   useEffect(() => {
   fetch("http://localhost:5000/api/items", {
     credentials: "include"
@@ -47,17 +44,17 @@ function MainPage() {
     
 // sorting logic 
 
-    if (sortOption !== 'default') { // sort function
+    if (sortOption !== 'default') { 
       list.sort((a, b) => {
         switch (sortOption) {
           case 'duration-short':
-            return a.duration - b.duration;  // shortest first ascending
+            return a.duration - b.duration;  
           case 'duration-long':
-            return b.duration - a.duration;  // longest first descending
+            return b.duration - a.duration;  
           case 'year':
-            return b.year - a.year;  // newest first
+            return b.year - a.year;  
           default:
-            return 0; // no sort 
+            return 0; 
         }
       });
     }
